@@ -1,10 +1,10 @@
 eurekaserver:
-   image:   johncarnell/tmx-eurekasvr:chapter7
+   image:   johncarnell/tmx-eurekasvr:chapter8
    ports:
        - "8761:8761"
 
 configserver:
-    image: johncarnell/tmx-confsvr:chapter7
+    image: johncarnell/tmx-confsvr:chapter8
     ports:
        - "8888:8888"
     links:
@@ -13,7 +13,7 @@ configserver:
        EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
 
 zuulserver:
-    image: johncarnell/tmx-zuulsvr:chapter7
+    image: johncarnell/tmx-zuulsvr:chapter8
     ports:
       - "5555:5555"
     links:
@@ -37,7 +37,7 @@ database:
       - POSTGRES_DB=eagle_eye_local
 
 licensingservice:
-    image: johncarnell/tmx-licensing-service:chapter7
+    image: johncarnell/tmx-licensing-service:chapter8
     ports:
       - "8080:8080"
     links:
@@ -57,7 +57,7 @@ licensingservice:
       ZKSERVER_URI: "kafkaserver"
 
 organizationservice:
-    image: johncarnell/tmx-organization-service:chapter7
+    image: johncarnell/tmx-organization-service:chapter8
     ports:
       - "8085:8085"
     links:
@@ -77,7 +77,7 @@ organizationservice:
       ZKSERVER_URI: "kafkaserver"
 
 #orgservice-new:
-#    image: johncarnell/tmx-orgservice-new:chapter7
+#    image: johncarnell/tmx-orgservice-new:chapter8
 #    ports:
 #      - "8087:8087"
 #    links:
@@ -93,7 +93,7 @@ organizationservice:
 #      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
 
 #authenticationservice:
-#    image: johncarnell/tmx-authentication-service:chapter7
+#    image: johncarnell/tmx-authentication-service:chapter8
 #    ports:
 #      - "8901:8901"
 #    links:
@@ -109,7 +109,7 @@ organizationservice:
 #      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
 
 #specialroutes-service:
-#    image: johncarnell/tmx-specialroutes-service:chapter7
+#    image: johncarnell/tmx-specialroutes-service:chapter8
 #    ports:
 #      - "8910:8910"
 #    links:
@@ -137,7 +137,7 @@ kibana:
     - es:elasticsearch
 
 fluentd:
-    image: johncarnell/tmx-fluentd:chapter7
+    image: johncarnell/tmx-fluentd:chapter8
     ports:
       - 24224:24224
       - 9980:9980
@@ -154,5 +154,3 @@ kafkaserver:
     ports:
       - 2181:2181
       - 9092:9092
-
-
