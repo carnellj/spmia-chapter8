@@ -7,7 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Eagle Eye Licensing Service</name>
+  <name>Eagle Eye Licensing Service </name>
   <description>Licensing Service</description>
 
   <parent>
@@ -81,7 +81,7 @@
        <groupId>org.springframework.cloud</groupId>
        <artifactId>spring-cloud-stream</artifactId>
    </dependency>
-   
+
    <dependency>
        <groupId>org.springframework.cloud</groupId>
        <artifactId>spring-cloud-starter-stream-kafka</artifactId>
