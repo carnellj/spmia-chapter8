@@ -1,33 +1,29 @@
-eurekaserver:
+version: '2'
+services:
+  eurekaserver:
    image:   johncarnell/tmx-eurekasvr:chapter8
    ports:
        - "8761:8761"
-
-configserver:
+  configserver:
     image: johncarnell/tmx-confsvr:chapter8
     ports:
        - "8888:8888"
-    links:
-       - "eurekaserver:eurekaserver"
     environment:
        EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-zuulserver:
+       EUREKASERVER_PORT: "8761"
+  zuulserver:
     image: johncarnell/tmx-zuulsvr:chapter8
     ports:
       - "5555:5555"
-    links:
-      - "eurekaserver:eurekaserver"
-      - "fluentd:fluentd"
-      - "configserver:configserver"
-     # - "orgservice-new:orgservice-new"
     environment:
       PROFILE: "default"
       SERVER_PORT: "5555"
       CONFIGSERVER_URI: "http://configserver:8888"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-database:
+      DATABASESERVER_PORT: "5432"
+      EUREKASERVER_PORT:   "8761"
+      CONFIGSERVER_PORT:   "8888"
+  database:
     image: postgres
     ports:
       - "5432:5432"
@@ -35,19 +31,10 @@ database:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=p0stgr@s
       - POSTGRES_DB=eagle_eye_local
-
-licensingservice:
+  licensingservice:
     image: johncarnell/tmx-licensing-service:chapter8
     ports:
       - "8080:8080"
-    links:
-      - "database:database"
-      - "configserver:configserver"
-      - "eurekaserver:eurekaserver"
-      - "fluentd:fluentd"
-      - "zuulserver:zuulserver"
-      - "kafkaserver:kafkaserver"
-      - "redis:redis"
     environment:
       PROFILE: "default"
       SERVER_PORT: "8080"
@@ -55,19 +42,16 @@ licensingservice:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       KAFKASERVER_URI: "kafkaserver"
       ZKSERVER_URI: "kafkaserver"
-
-organizationservice:
+      DATABASESERVER_PORT: "5432"
+      EUREKASERVER_PORT:   "8761"
+      CONFIGSERVER_PORT:   "8888"
+      ZUULSERVER_PORT:     "5555"
+      KAFKASERVER_PORT:    "2181"
+      REDIS_PORT:          "6379"
+  organizationservice:
     image: johncarnell/tmx-organization-service:chapter8
     ports:
       - "8085:8085"
-    links:
-      - "database:database"
-      - "configserver:configserver"
-      - "eurekaserver:eurekaserver"
-      - "fluentd:fluentd"
-      - "es:es"
-      - "zuulserver:zuulserver"
-      - "kafkaserver:kafkaserver"
     environment:
       PROFILE: "default"
       SERVER_PORT: "8085"
@@ -75,81 +59,30 @@ organizationservice:
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       KAFKASERVER_URI: "kafkaserver"
       ZKSERVER_URI: "kafkaserver"
-
-#orgservice-new:
-#    image: johncarnell/tmx-orgservice-new:chapter8
-#    ports:
-#      - "8087:8087"
-#    links:
-#      - "database:database"
-#      - "configserver:configserver"
-#      - "eurekaserver:eurekaserver"
-#      - "es:es"
-#      - "fluentd:fluentd"
-#    environment:
-#      PROFILE: "default"
-#      SERVER_PORT: "8087"
-#      CONFIGSERVER_URI: "http://configserver:8888"
-#      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-#authenticationservice:
-#    image: johncarnell/tmx-authentication-service:chapter8
-#    ports:
-#      - "8901:8901"
-#    links:
-#      - "database:database"
-#      - "configserver:configserver"
-#      - "eurekaserver:eurekaserver"
-#      - "zuulserver:zuulserver"
-#      - "fluentd:fluentd"
-#    environment:
-#      PROFILE: "default"
-#      SERVER_PORT: "8901"
-#      CONFIGSERVER_URI: "http://configserver:8888"
-#      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-#specialroutes-service:
-#    image: johncarnell/tmx-specialroutes-service:chapter8
-#    ports:
-#      - "8910:8910"
-#    links:
-#      - "database:database"
-#      - "configserver:configserver"
-#      - "eurekaserver:eurekaserver"
-#      - "fluentd:fluentd"
-#    environment:
-#      PROFILE: "default"
-#      SERVER_PORT: "8910"
-#      CONFIGSERVER_URI: "http://configserver:8888"
-#      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-es:
-  image: elasticsearch:2
-  ports:
-    - 9200:9200
-    - 9300:9300
-
-kibana:
-  image: kibana
-  ports:
-    - 5601:5601
-  links:
-    - es:elasticsearch
-
-fluentd:
+      DATABASESERVER_PORT: "5432"
+      EUREKASERVER_PORT:   "8761"
+      CONFIGSERVER_PORT:   "8888"
+      ZUULSERVER_PORT:     "5555"
+      KAFKASERVER_PORT:    "2181"
+  es:
+    image: elasticsearch:2
+    ports:
+      - 9200:9200
+      - 9300:9300
+  kibana:
+    image: kibana
+    ports:
+      - 5601:5601
+  fluentd:
     image: johncarnell/tmx-fluentd:chapter8
     ports:
       - 24224:24224
       - 9980:9980
-    links:
-      - es:es
-
-redis:
+  redis:
     image: redis:alpine
     ports:
       - 6379:6379
-
-kafkaserver:
+  kafkaserver:
     image: spotify/kafka
     ports:
       - 2181:2181
