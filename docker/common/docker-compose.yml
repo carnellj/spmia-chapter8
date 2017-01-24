@@ -64,20 +64,6 @@ services:
       CONFIGSERVER_PORT:   "8888"
       ZUULSERVER_PORT:     "5555"
       KAFKASERVER_PORT:    "2181"
-  es:
-    image: elasticsearch:2
-    ports:
-      - 9200:9200
-      - 9300:9300
-  kibana:
-    image: kibana
-    ports:
-      - 5601:5601
-  fluentd:
-    image: johncarnell/tmx-fluentd:chapter8
-    ports:
-      - 24224:24224
-      - 9980:9980
   redis:
     image: redis:alpine
     ports:
