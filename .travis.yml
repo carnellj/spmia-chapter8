@@ -24,5 +24,4 @@ script:
   - docker push johncarnell/tmx-organization-service:chapter8
   - docker push johncarnell/tmx-confsvr:chapter8
   - docker push johncarnell/tmx-eurekasvr:chapter8
-  - docker push johncarnell/tmx-fluentd:chapter8
   - docker push johncarnell/tmx-zuulsvr:chapter8
