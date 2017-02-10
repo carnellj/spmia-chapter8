@@ -49,6 +49,7 @@ services:
       ZUULSERVER_PORT:     "5555"
       KAFKASERVER_PORT:    "2181"
       REDIS_PORT:          "6379"
+      ENCRYPT_KEY:       "IMSYMMETRIC"
   organizationservice:
     image: johncarnell/tmx-organization-service:chapter8
     ports:
@@ -65,6 +66,7 @@ services:
       CONFIGSERVER_PORT:   "8888"
       ZUULSERVER_PORT:     "5555"
       KAFKASERVER_PORT:    "2181"
+      ENCRYPT_KEY:       "IMSYMMETRIC"
   redis:
     image: redis:alpine
     ports:
