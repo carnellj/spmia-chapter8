@@ -26,7 +26,6 @@ public class UserContext {
     public static String getOrgId() { return orgId.get(); }
     public static void setOrgId(String aOrg) {orgId.set(aOrg);}
 
-
     public static HttpHeaders getHttpHeaders(){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set(CORRELATION_ID, getCorrelationId());
