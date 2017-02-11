@@ -40,6 +40,7 @@ public class Application {
     private ServiceConfig serviceConfig;
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
+
     @LoadBalanced
     @Bean
     public RestTemplate getRestTemplate() {
@@ -55,7 +56,6 @@ public class Application {
         return template;
     }
 
-    //NEED TO USE A CONFIGURATION OBJECT HERE
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConnFactory = new JedisConnectionFactory();

@@ -5,6 +5,7 @@ import com.thoughtmechanix.organization.events.source.SimpleSourceBean;
 import com.thoughtmechanix.organization.model.Organization;
 import com.thoughtmechanix.organization.services.OrganizationService;
 import com.thoughtmechanix.organization.utils.UserContext;
+import com.thoughtmechanix.organization.utils.UserContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class OrganizationServiceController {
 
     @RequestMapping(value="/{organizationId}",method = RequestMethod.GET)
     public Organization getOrganization( @PathVariable("organizationId") String organizationId) {
-      logger.debug("Looking up data for org {}", organizationId);
+      logger.debug("Looking up data for org {} with correlation id {}", organizationId, UserContextHolder.getContext().getCorrelationId());
 
         Organization org = orgService.getOrg(organizationId);
         org.setContactName(org.getContactName());
