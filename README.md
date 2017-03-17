@@ -12,7 +12,8 @@ post policies enforced on the calls.
 6.  A special routes services that the the API gateway will call to determine whether or not it should route a user's service call to a different service then the one they were originally calling.  This service is used in conjunction with the orgservice-new service to determine whether a call to the organization service gets routed to an old version of the organization service vs. a new version of the service.
 7.  A licensing service that will manage licensing data used within EagleEye.
 8.  A Postgres SQL database used to hold the data for these two services.
-9.  A Kafka message bus to transport messages
+9.  A Kafka message bus to transport messages between services.
+10. A Redis service to act as a distributed cache.
 
 # Software needed
 1.	Apache Maven (http://apache.maven.org). I used version 3.3.9 of the Maven. I chose Maven because, while other build tools like Gradle are extremely popular, Maven is still the pre-dominate build tool in use in the Java ecosystem. All of the code examples in this book have been compiled with Java version 1.8.
