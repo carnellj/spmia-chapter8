@@ -13,6 +13,7 @@ spring:
           destination: orgChangeTopic
           content-type: application/json
           group: licensingGroup
+      kafka:
         binder:
           zkNodes: localhost
           brokers: localhost

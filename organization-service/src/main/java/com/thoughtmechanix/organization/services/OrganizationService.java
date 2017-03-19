@@ -33,8 +33,8 @@ public class OrganizationService {
 
     }
 
-    public void deleteOrg(Organization org){
-        orgRepository.delete( org.getId());
-        simpleSourceBean.publishOrgChange("DELETE", org.getId());
+    public void deleteOrg(String  orgId){
+        orgRepository.delete( orgId );
+        simpleSourceBean.publishOrgChange("DELETE", orgId);
     }
 }
