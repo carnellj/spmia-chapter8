@@ -1,6 +1,6 @@
 package com.thoughtmechanix.organization.events.source;
 
-import com.thoughtmechanix.organization.event.models.OrganizationChangeModel;
+import com.thoughtmechanix.organization.events.models.OrganizationChangeModel;
 import com.thoughtmechanix.organization.utils.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
